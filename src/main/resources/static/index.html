@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Spring Boot Bank</h1>
+            <div class="currency-selector">
+                <span>Currency:</span>
+                <select id="currency-select">
+                    <option value="USD">USD</option>
+                    <option value="VND">VND</option>
+                </select>
+            </div>
+            <div class="notification-selector">
+                <span>Notification:</span>
+                <select id="notification-select">
+                    <option value="1">Email</option>
+                    <option value="2">SMS</option>
+                </select>
+            </div>
+        </header>
+        
+        <section class="balance-section">
+            <h2>Current Balance</h2>
+            <div class="balance-display" id="balance">Loading...</div>
+        </section>
+        
+        <section class="transaction-section">
+            <div class="transaction-card">
+                <h3>Deposit Money</h3>
+                <div class="input-group">
+                    <input type="number" id="deposit-amount" placeholder="Amount" min="0" step="0.01">
+                    <button id="deposit-btn" class="btn btn-primary">Deposit</button>
+                </div>
+            </div>
+            
+            <div class="transaction-card">
+                <h3>Withdraw Money</h3>
+                <div class="input-group">
+                    <input type="number" id="withdraw-amount" placeholder="Amount" min="0" step="0.01">
+                    <button id="withdraw-btn" class="btn btn-danger">Withdraw</button>
+                </div>
+            </div>
+        </section>
+        
+        <section class="notifications-section">
+            <h2>Notifications</h2>
+            <div class="notification-container" id="notification-list">
+                <!-- Notifications will be added here dynamically -->
+            </div>
+        </section>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>

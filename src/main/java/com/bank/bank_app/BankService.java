@@ -5,8 +5,8 @@ import org.springframework.stereotype.Component;
 
 import org.springframework.context.ApplicationContext;
 
+import com.bank.bank_app.notification.NotificationObserver;
 import com.bank.bank_app.notification.NotificationService;
-import com.bank.bank_app.notification.NotificationStrategy;
 
 @Component
 public class BankService {
@@ -51,24 +51,19 @@ public class BankService {
         return _currencyService.formatMoney(getBalance());
     }
 
-    public void setNotificationChannel(Integer number){
-        switch (number) {
-            case 1: // Email notification
-                _notifier.setNotificationStrategy(
-                    (NotificationStrategy) _applicationContext.getBean("emailNotification"));
-                _logger.log("Switched to Email notifications");
-                break;
-            
-            case 2: // SMS notification
-                _notifier.setNotificationStrategy(
-                    (NotificationStrategy) _applicationContext.getBean("smsNotification"));
-                _logger.log("Switched to SMS notifications");
-                break;
-        
-            default:
-                _logger.log("Invalid notification channel: " + number);
-                break;
-        }
+    public void addNotificationChannel(String observerName) {
+        NotificationObserver observer = 
+            (NotificationObserver) _applicationContext.getBean(observerName);
+        _notifier.addObserver(observer);
+        _logger.log("Added " + observerName + " notification channel");
+    }
+    
+    public void removeNotificationChannel(String observerName) {
+        NotificationObserver observer = 
+            (NotificationObserver) _applicationContext.getBean(observerName);
+        // Assuming you add a removeObserver method to NotificationService
+        _notifier.removeObserver(observer);
+        _logger.log("Removed " + observerName + " notification channel");
     }
 
     public void setCurrency(String currencyCode) {
